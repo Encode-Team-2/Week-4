@@ -31,3 +31,15 @@ cd frontend
 yarn install
 yarn dev
 ```
+
+## Contracts
+
+Copied from week3 and add improvements
+
+## Setup
+
+```sh
+cd contracts
+yarn install
+yarn hardhat compile
+```

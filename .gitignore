@@ -78,3 +78,15 @@ pnp/
 
 # Package manager files
 yarn-error.log
+
+
+
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+
+# Hardhat files
+*/cache
+*/artifacts
