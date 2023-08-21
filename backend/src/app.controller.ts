@@ -41,6 +41,11 @@ export class TokenizedBallotController {
 
   @Get('winning-proposal')
   getVotingPower(): Promise<number> {
-    return this.ballotService.getwinningProposal();
+    return this.ballotService.getWinningProposal();
+  }
+
+  @Get('winner-name')
+  getWinnerName(): Promise<string> {
+    return this.ballotService.getWinnerName();
   }
 }
