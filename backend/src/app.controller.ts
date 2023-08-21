@@ -38,4 +38,9 @@ export class TokenizedBallotController {
   getContractAddress(): string {
     return this.ballotService.getContractAddress();
   }
+
+  @Get('winning-proposal')
+  getVotingPower(): Promise<number> {
+    return this.ballotService.getwinningProposal();
+  }
 }

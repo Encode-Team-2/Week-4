@@ -70,4 +70,8 @@ export class TokenizedBallotService {
   getContractAddress(): any {
     return { address: process.env.TOKENIZED_BALLOT_ADDRESS };
   }
+
+  async getwinningProposal(): Promise<number> {
+    return await this.contract.winningProposal();
+  }
 }
