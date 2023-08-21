@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { MyTokenService } from './app.service';
+import { MyTokenService, TokenizedBallotService } from './app.service';
 import { ApiTags } from '@nestjs/swagger';
 import { MintTokenDTO } from './dtos/mintToken.dto';
 
@@ -9,8 +9,8 @@ export class MyTokenController {
   constructor(private readonly appService: MyTokenService) {}
 
   @Get('address')
-  getContractAddress(): string {
-    return this.appService.getContractAddress();
+  getTokenAddress(): string {
+    return this.appService.getTokenAddress();
   }
 
   @Get('total-supply')
@@ -26,5 +26,16 @@ export class MyTokenController {
   @Post('mint')
   mintTokens(@Body() body: MintTokenDTO): Promise<any> {
     return this.appService.mintTokens(body.address);
+  }
+}
+
+@ApiTags('TokenizedBallot')
+@Controller('ballot')
+export class TokenizedBallotController {
+  constructor(private readonly ballotService: TokenizedBallotService) {}
+
+  @Get('address')
+  getContractAddress(): string {
+    return this.ballotService.getContractAddress();
   }
 }

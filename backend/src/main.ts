@@ -14,7 +14,7 @@ async function bootstrap() {
     .setDescription('Weekend 4 Project')
     .setVersion('1.0')
     .addTag('MyToken')
-    .addTag('VotingBallot')
+    .addTag('TokenizedBallot')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
