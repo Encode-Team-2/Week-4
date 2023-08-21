@@ -32,9 +32,9 @@ function WalletInfo() {
 
         <TokenAddressFromApi></TokenAddressFromApi>
         <BallotAddressFromApi></BallotAddressFromApi>
+        <TotalSupplyFromApi></TotalSupplyFromApi>
         <TokenBalanceFromApi address={address}></TokenBalanceFromApi>
         <RequestTokenToBeMinted address={address}></RequestTokenToBeMinted>
-        <TotalSupplyFromApi></TotalSupplyFromApi>
       </div>
     );
   if (isConnecting)
