@@ -32,7 +32,9 @@ function WalletInfo() {
 
         <TokenAddressFromApi></TokenAddressFromApi>
         <BallotAddressFromApi></BallotAddressFromApi>
+        <TokenBalanceFromApi address={address}></TokenBalanceFromApi>
         <RequestTokenToBeMinted address={address}></RequestTokenToBeMinted>
+        <TotalSupplyFromApi></TotalSupplyFromApi>
       </div>
     );
   if (isConnecting)
@@ -132,6 +134,52 @@ function RequestTokenToBeMinted(params: { address: `0x${string}` }) {
     <div>
       <p>Mint success: {data.result ? "worked" : "failed"}</p>
       <p>Transaction hash: {data.txHash}</p>
+    </div>
+  );
+}
+
+function TokenBalanceFromApi(params: { address: `0x${string}` }) {
+  const [data, setData] = useState<{ balance: string }>();
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/token/balance/${params.address}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (isLoading) return <p>Loading token balance from API...</p>;
+  if (!data) return <p>No token balance information</p>;
+
+  return (
+    <div>
+      <p>Token balance from API: {data.balance}</p>
+    </div>
+  );
+}
+
+function TotalSupplyFromApi() {
+  const [data, setData] = useState<{ balance: string }>();
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/token/total-supply`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (isLoading) return <p>Loading total supply from API...</p>;
+  if (!data) return <p>No total supply information</p>;
+
+  return (
+    <div>
+      <p>Total supply from API: {data.balance}</p>
     </div>
   );
 }

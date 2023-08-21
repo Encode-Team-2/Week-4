@@ -14,13 +14,13 @@ export class MyTokenController {
   }
 
   @Get('total-supply')
-  getTotalSupplyAddress() {
-    return this.appService.getTotalSupply();
+  async getTotalSupplyAddress() {
+    return await this.appService.getTotalSupply();
   }
 
   @Get('balance/:address')
-  getTokenBalance(@Param('address') address: string) {
-    return this.appService.getTokenBalance(address);
+  async getTokenBalance(@Param('address') address: string) {
+    return await this.appService.getTokenBalance(address);
   }
 
   @Post('mint')

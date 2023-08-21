@@ -28,12 +28,15 @@ export class MyTokenService {
     return { address: process.env.TOKEN_ADDRESS };
   }
 
-  getTotalSupply() {
-    return this.contract.totalSupply();
+  async getTotalSupply() {
+    const balance_ = await this.contract.totalSupply();
+    return { balance: Number(balance_) };
   }
 
-  getTokenBalance(address: string) {
-    return this.contract.balanceOf(address);
+  async getTokenBalance(address: string): Promise<any> {
+    const balance_ = await this.contract.balanceOf(address);
+
+    return { balance: Number(balance_) };
   }
 
   async mintTokens(address: string): Promise<any> {
