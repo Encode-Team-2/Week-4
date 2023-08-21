@@ -35,4 +35,13 @@ export class MyTokenService {
   getTokenBalance(address: string) {
     return this.contract.balanceOf(address);
   }
+
+  async mintTokens(address: string): Promise<any> {
+    console.log(`Minting transaction: ${address}`);
+    const tx = await this.contract.mint(address, ethers.parseUnits('1'));
+    const receipt = await tx.wait(3); // Wait for 3 confirmations
+    console.log(`Receipt: ${receipt}`);
+    
+    return { success: true, txHash: receipt.hash };
+  }
 }

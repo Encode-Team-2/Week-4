@@ -1,6 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { MyTokenService } from './app.service';
 import { ApiTags } from '@nestjs/swagger';
+import { MintTokenDTO } from './dtos/mintToken.dto';
 
 @ApiTags('MyToken')
 @Controller('token')
@@ -20,5 +21,10 @@ export class MyTokenController {
   @Get('balance/:address')
   getTokenBalance(@Param('address') address: string) {
     return this.appService.getTokenBalance(address);
+  }
+
+  @Post('mint')
+  mintTokens(@Body() body: MintTokenDTO): Promise<any> {
+    return this.appService.mintTokens(body.address);
   }
 }
