@@ -32,6 +32,7 @@ function WalletInfo() {
 
         <TokenAddressFromApi></TokenAddressFromApi>
         <BallotAddressFromApi></BallotAddressFromApi>
+        <RequestTokenToBeMinted address={address}></RequestTokenToBeMinted>
       </div>
     );
   if (isConnecting)
@@ -95,6 +96,42 @@ function BallotAddressFromApi() {
   return (
     <div>
       <p>Ballot address from API: {data.address}</p>
+    </div>
+  );
+}
+
+function RequestTokenToBeMinted(params: { address: `0x${string}` }) {
+  const [data, setData] = useState<any>(null);
+  const [isLoading, setLoading] = useState(false);
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ address: params.address }),
+  };
+
+  if (isLoading) return <p>Requesting tokens from API...</p>;
+  if (!data)
+    return (
+      <button
+        disabled={isLoading}
+        onClick={() => {
+          setLoading(true);
+          fetch("http://localhost:3001/token/mint", requestOptions)
+            .then((res) => res.json())
+            .then((data) => {
+              setData(data);
+              setLoading(false);
+            });
+        }}
+      >
+        Request tokens
+      </button>
+    );
+  return (
+    <div>
+      <p>Mint success: {data.result ? "worked" : "failed"}</p>
+      <p>Transaction hash: {data.txHash}</p>
     </div>
   );
 }
